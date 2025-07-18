@@ -2,8 +2,6 @@
 
 CodeCrate is a full-stack web application that helps developers save, manage, and organize their code snippets efficiently. Designed with a clean, intuitive UI and developer-first experience in mind, it supports features like real-time search, inline editing, tagging, and user-specific access control.
 
----
-
 ## ✨ Features
 
 - 🔐 User authentication (login/signup with protected routes)
@@ -15,7 +13,6 @@ CodeCrate is a full-stack web application that helps developers save, manage, an
 - 👤 Profile settings and password update
 - 🔐 Frontend checks for permissions and secure API calls
 
----
 
 ## 🛠️ Tech Stack
 
@@ -31,7 +28,7 @@ CodeCrate is a full-stack web application that helps developers save, manage, an
 - MongoDB + Mongoose
 - JWT for authentication
 
----
+
 
 ## 🚀 Getting Started
 
