@@ -3,7 +3,7 @@ import User from "../models/user-model.js";
 
 export const createSnippet = async (req, res) => {
   try {
-    const { title, description = "", code, language = "" } = req.body;
+    const { title, description = "", code, language = "",tags } = req.body;
     if (!title || !code) {
       return res.status(400).json({ msg: "No code or title !" });
     }
@@ -12,16 +12,17 @@ export const createSnippet = async (req, res) => {
       description,
       code,
       language,
+      tags,
       admin: req.user._id,
     });
-    const result = await snippet.save();
+    const result = await (await snippet.save()).populate("admin", "-password");
     if (!result) {
       return res.status(400).json({ msg: "Error while saving snippet !" });
     }
     await User.findByIdAndUpdate(req.user._id, {
       $push: { snippets: result._id },
     });
-    res.status(201).json({ msg: "Snippet created successfully !" });
+    res.status(201).json({ msg: "Snippet created successfully !", snippet: snippet });
   } catch (err) {
     res
       .status(400)
@@ -35,7 +36,7 @@ export const getAllSnippet = async (req, res) => {
     if (!snippets) {
       return res.status(404).json({ msg: "No snippets found !" });
     }
-    res.status(200).json(snippets);
+    res.status(200).json({ msg: "Success", snippets: snippets });
   } catch (err) {
     res.status(500).json({ msg: "Error in fetching snippets !" });
   }
