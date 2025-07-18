@@ -41,8 +41,7 @@ CodeCrate is a full-stack web application that helps developers save, manage, an
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/your-username/codecrate.git
-cd codecrate
+git clone https://github.com/GovindJha01/code-snippet-manager.git
 
 ```
 2. **Install dependencies**
