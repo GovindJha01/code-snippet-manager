@@ -21,24 +21,21 @@ const HomeLayout = () => {
   // Handle mobile/desktop view switching
   useEffect(() => {
     if (!isMobile) {
-      // Always reset to list view on desktop
       setShowPreview(false);
     }
   }, [isMobile]);
 
-  // On mobile, show preview when a snippet is selected
   useEffect(() => {
     if (isMobile && selectedSnippet && !showPreview) {
       setShowPreview(true);
     } else if (isMobile && !selectedSnippet && showPreview) {
-      // If no snippet is selected, go back to list view
       setShowPreview(false);
     }
   }, [isMobile, selectedSnippet, showPreview]);
 
   const handleBackToList = () => {
     setShowPreview(false);
-    selectSnippet(null); // Clear the selected snippet when going back
+    selectSnippet(null);
   };
 
   if (isMobile) {
