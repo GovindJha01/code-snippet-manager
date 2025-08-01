@@ -81,19 +81,25 @@ export default function AuthPage() {
     >
       <Card
         sx={{
-          maxWidth: 550,
+          maxWidth: { xs: '100%', sm: 550 }, // Full width on mobile
           width: "100%",
           boxShadow: 3,
           borderRadius: 2,
+          mx: { xs: 1, sm: 0 }, // Small margin on mobile
         }}
       >
-        <CardContent>
+        <CardContent sx={{ p: { xs: 2, sm: 3 } }}> {/* Less padding on mobile */}
           {/* Header with Logo and Name */}
           <Box display="flex" alignItems="center" mb={2}>
             <Logo />
           </Box>
 
-          <Typography variant="subtitle1" color="textSecondary" mb={1}>
+          <Typography 
+            variant="subtitle1" 
+            color="textSecondary" 
+            mb={1}
+            sx={{ fontSize: { xs: '0.9rem', sm: '1rem' } }}
+          >
             <strong>Save smarter. Code faster.</strong> Your personal vault for
             code snippets, templates & hacks.
           </Typography>
@@ -115,6 +121,12 @@ export default function AuthPage() {
                 onChange={(e) => setForm({ ...form, userName: e.target.value })}
                 error={!!errors.userName}
                 helperText={errors.userName}
+                InputProps={{
+                  sx: { fontSize: { xs: '0.9rem', sm: '1rem' } }
+                }}
+                InputLabelProps={{
+                  sx: { fontSize: { xs: '0.9rem', sm: '1rem' } }
+                }}
               />
             )}
             <TextField
@@ -126,6 +138,12 @@ export default function AuthPage() {
               onChange={(e) => setForm({ ...form, email: e.target.value })}
               error={!!errors.email}
               helperText={errors.email}
+              InputProps={{
+                sx: { fontSize: { xs: '0.9rem', sm: '1rem' } }
+              }}
+              InputLabelProps={{
+                sx: { fontSize: { xs: '0.9rem', sm: '1rem' } }
+              }}
             />
             <TextField
               label="Password"
@@ -137,6 +155,7 @@ export default function AuthPage() {
               error={!!errors.password}
               helperText={errors.password}
               InputProps={{
+                sx: { fontSize: { xs: '0.9rem', sm: '1rem' } },
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton
@@ -147,6 +166,9 @@ export default function AuthPage() {
                     </IconButton>
                   </InputAdornment>
                 ),
+              }}
+              InputLabelProps={{
+                sx: { fontSize: { xs: '0.9rem', sm: '1rem' } }
               }}
             />
             <Stack sx={{ width: "100%", mt: 2 }}>

@@ -127,9 +127,23 @@ const SnippetPreview = () => {
   };
 
   return (
-    <Box sx={{ p: 4 }}>
-      <Stack direction="row" justifyContent="space-between" alignItems="center">
-        <Typography variant="h5" fontWeight={600}>
+    <Box sx={{ p: { xs: 2, sm: 4 }, width: "100%", height: "100%" }}>
+      <Stack 
+        direction="row" 
+        justifyContent="space-between" 
+        alignItems="center"
+        spacing={1}
+        sx={{ flexWrap: { xs: 'wrap', sm: 'nowrap' } }} // Allow wrapping only on very small screens
+      >
+        <Typography 
+          variant="h5" 
+          fontWeight={600}
+          sx={{ 
+            fontSize: { xs: '1.3rem', sm: '1.5rem' },
+            flex: 1, // Take available space
+            minWidth: 0, // Allow text to shrink
+          }}
+        >
           {title}
         </Typography>
         {language && (
@@ -137,30 +151,42 @@ const SnippetPreview = () => {
             label={language}
             color="primary"
             size="small"
-            sx={{ fontWeight: 500 }}
+            sx={{ 
+              fontWeight: 500,
+              fontSize: { xs: '0.7rem', sm: '0.8rem' },
+              flexShrink: 0,
+            }}
           />
         )}
       </Stack>
 
       {description && (
-        <Typography variant="body2" sx={{ mt: 1, color: "text.secondary" }}>
+        <Typography 
+          variant="body2" 
+          sx={{ 
+            mt: 1, 
+            color: "text.secondary",
+            fontSize: { xs: '0.8rem', sm: '0.875rem' }
+          }}
+        >
           {description}
         </Typography>
       )}
       {tags.length > 0 && (
         <Stack
-          direction="row"
+          direction="row" // Keep horizontal layout
           justifyContent="space-between"
           alignItems="center"
-          sx={{ mt: 2, flexWrap: "wrap" }}
+          sx={{ mt: 2, flexWrap: 'wrap', gap: 1 }}
         >
-          <Stack direction="row" spacing={1} flexWrap="wrap">
+          <Stack direction="row" spacing={1} flexWrap="wrap" sx={{ flex: 1 }}>
             {tags.map((tag, i) => (
               <Chip
                 key={`${tag}-${i}`}
                 label={tag}
                 variant="outlined"
                 size="small"
+                sx={{ fontSize: { xs: '0.7rem', sm: '0.8rem' } }}
               />
             ))}
           </Stack>
@@ -170,8 +196,9 @@ const SnippetPreview = () => {
               sx={{
                 fontStyle: "italic",
                 color: "text.secondary",
-                ml: 2,
                 whiteSpace: "nowrap",
+                fontSize: { xs: '0.7rem', sm: '0.75rem' },
+                flexShrink: 0, // Don't shrink the author text
               }}
             >
               By {admin._id === user?._id ? "me" : admin.userName}
@@ -190,11 +217,11 @@ const SnippetPreview = () => {
             spellCheck={false}
             style={{
               width: "100%",
-              fontSize: "0.9rem",
+              fontSize: window.innerWidth < 600 ? "0.8rem" : "0.9rem", // Smaller font on mobile
               fontFamily: "monospace",
               background: "#282c34",
               color: "#fff",
-              padding: "1rem",
+              padding: window.innerWidth < 600 ? "0.5rem" : "1rem", // Less padding on mobile
               borderRadius: "8px",
               border: "1px solid #444",
               resize: "vertical",
@@ -209,9 +236,10 @@ const SnippetPreview = () => {
             wrapLongLines
             customStyle={{
               borderRadius: 8,
-              fontSize: "0.9rem",
-              padding: "1rem",
+              fontSize: window.innerWidth < 600 ? "0.8rem" : "0.9rem", 
+              padding: window.innerWidth < 600 ? "0.5rem" : "1rem", 
               marginTop: "1.5rem",
+              overflowX: "auto", 
             }}
           >
             {code}
@@ -219,7 +247,15 @@ const SnippetPreview = () => {
         )}
       </Box>
 
-      <Stack direction="row" spacing={2} sx={{ mt: 2 }}>
+      <Stack 
+        direction="row" 
+        spacing={2} 
+        sx={{ 
+          mt: 2,
+          justifyContent: { xs: 'center', sm: 'flex-start' }, // Center on mobile
+          flexWrap: 'wrap'
+        }}
+      >
         {isEditing ? (
           <>
             <Tooltip title="Cancel">

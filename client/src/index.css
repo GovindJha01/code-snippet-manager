@@ -5,6 +5,23 @@
     font-family: 'Poppins', sans-serif;
 }
 
+html, body {
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* Responsive font sizes */
+@media (max-width: 600px) {
+    html {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    html {
+        font-size: 13px;
+    }
+}
+
 ::-webkit-scrollbar {
   width: 2px!important;
   height: 1px!important;
@@ -14,4 +31,76 @@
 }
 ::-webkit-scrollbar-track {
   background: hsla(0,0%,100%,.1);
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+    .MuiDrawer-paper {
+        width: 280px !important;
+    }
+    
+    .MuiCard-root {
+        border-radius: 8px !important;
+    }
+    
+    .MuiChip-root {
+        font-size: 0.7rem !important;
+    }
+    
+    /* Header specific adjustments */
+    .MuiToolbar-root {
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+    }
+    
+    /* Text fields on mobile */
+    .MuiTextField-root .MuiInputBase-input {
+        font-size: 0.9rem !important;
+    }
+    
+    .MuiTextField-root .MuiInputLabel-root {
+        font-size: 0.9rem !important;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+    .MuiToolbar-root {
+        min-height: 56px !important;
+    }
+    
+    .MuiInputBase-input {
+        font-size: 0.85rem !important;
+    }
+    
+    .MuiAvatar-root {
+        width: 28px !important;
+        height: 28px !important;
+        font-size: 0.75rem !important;
+    }
+}
+
+/* Desktop improvements */
+@media (min-width: 1200px) {
+    .MuiToolbar-root {
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+    }
+    
+    .MuiInputBase-root {
+        border-radius: 8px !important;
+    }
+}
+
+/* General text field improvements for all screen sizes */
+.MuiTextField-root .MuiInputBase-input {
+    font-size: 1rem !important;
+}
+
+.MuiTextField-root .MuiInputLabel-root {
+    font-size: 1rem !important;
+}
+
+.MuiTextField-root .MuiFormHelperText-root {
+    font-size: 0.875rem !important;
 }

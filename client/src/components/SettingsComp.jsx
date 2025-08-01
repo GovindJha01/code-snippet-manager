@@ -94,6 +94,12 @@ const SettingsComp = () => {
           margin="normal"
           value={userName}
           onChange={(e) => setUserName(e.target.value)}
+          InputProps={{
+            sx: { fontSize: { xs: '0.9rem', sm: '1rem' } }
+          }}
+          InputLabelProps={{
+            sx: { fontSize: { xs: '0.9rem', sm: '1rem' } }
+          }}
         />
         <TextField
           label="Email"
@@ -101,6 +107,12 @@ const SettingsComp = () => {
           margin="normal"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          InputProps={{
+            sx: { fontSize: { xs: '0.9rem', sm: '1rem' } }
+          }}
+          InputLabelProps={{
+            sx: { fontSize: { xs: '0.9rem', sm: '1rem' } }
+          }}
         />
         <Button
           variant="contained"
@@ -155,6 +167,12 @@ const SettingsComp = () => {
           margin="normal"
           value={oldPassword}
           onChange={(e) => setOldPassword(e.target.value)}
+          InputProps={{
+            sx: { fontSize: { xs: '0.9rem', sm: '1rem' } }
+          }}
+          InputLabelProps={{
+            sx: { fontSize: { xs: '0.9rem', sm: '1rem' } }
+          }}
         />
         <TextField
           label="New Password"
@@ -163,6 +181,12 @@ const SettingsComp = () => {
           margin="normal"
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
+          InputProps={{
+            sx: { fontSize: { xs: '0.9rem', sm: '1rem' } }
+          }}
+          InputLabelProps={{
+            sx: { fontSize: { xs: '0.9rem', sm: '1rem' } }
+          }}
         />
         <Button
           variant="contained"

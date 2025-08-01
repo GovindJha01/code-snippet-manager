@@ -7,6 +7,7 @@ const useSnippetStore = create((set, get) => ({
   selectedSnippet: null,
   loading: false,
   error: null,
+  hasFetched: false, // Add flag to track if we've already fetched
 
   setSnippets: (data) => set({ snippets: data }),
   selectSnippet: (snippet) => set({ selectedSnippet: snippet }),
@@ -14,10 +15,19 @@ const useSnippetStore = create((set, get) => ({
 
   // Fetch all snippets
   fetchSnippets: async () => {
+    const { hasFetched, loading } = get();
+    
+    // Prevent multiple simultaneous calls and avoid refetching if already done
+    if (loading || hasFetched) return;
+    
     try {
       set({ loading: true });
       const res = await axios.get("/snippets/all");
-      set({ snippets: res.data.snippets, loading: false , });
+      set({ 
+        snippets: res.data.snippets, 
+        loading: false,
+        hasFetched: true 
+      });
     } catch (err) {
       set({
         error: err.response?.data?.msg || "Error fetching snippets",
@@ -25,6 +35,8 @@ const useSnippetStore = create((set, get) => ({
       });
     }
   },
+ 
+  resetFetchFlag: () => set({ hasFetched: false }),
 
   // Create a new snippet
   createSnippet: async (snippetData) => {

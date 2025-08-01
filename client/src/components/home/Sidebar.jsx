@@ -15,7 +15,7 @@ import NewSnippetModal from "../NewSnippetModal";
 import { useState } from "react";
 import Logo from "../../utils/Logo";
 
-const Sidebar = () => {
+const Sidebar = ({ onClose }) => {
   const [openModal, setOpenModal] = useState(false);
   const createSnippet = useSnippetStore((state) => state.createSnippet);
   const { logout } = useAuthStore();
@@ -29,6 +29,13 @@ const Sidebar = () => {
   const handleCreateSnippet = async (snippetData) => {
     await createSnippet(snippetData); //  API call
     setOpenModal(false); //  close modal
+  };
+
+  const handleNavClick = () => {
+    // Close sidebar on mobile when navigation item is clicked
+    if (onClose) {
+      onClose();
+    }
   };
   return (
     <Box
@@ -66,7 +73,7 @@ const Sidebar = () => {
               color: isActive ? "#1976d2" : "inherit",
             })}
           >
-            <ListItemButton>
+            <ListItemButton onClick={handleNavClick}>
               <ListItemIcon sx={{ minWidth: 32 }}> {item.icon}</ListItemIcon>
               <ListItemText primary={item.text} />
             </ListItemButton>
@@ -76,7 +83,10 @@ const Sidebar = () => {
         <Divider sx={{ my: 1 }} />
 
         <ListItemButton
-          onClick={logout}
+          onClick={() => {
+            logout();
+            if (onClose) onClose();
+          }}
           sx={{ display: "flex", alignItems: "center" }}
         >
           <ListItemIcon sx={{ minWidth: 32 }}>
