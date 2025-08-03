@@ -1,6 +1,6 @@
 import Snippet from "../models/snippet-model.js";
 import User from "../models/user-model.js";
-
+import { fetchFromAIServer } from "../utils/utils.js"; 
 export const createSnippet = async (req, res) => {
   try {
     const { title, description = "", code, language = "",tags } = req.body;
@@ -117,5 +117,20 @@ export const updateSnippet = async (req, res) => {
     res.status(200).json({ msg: "Snippet updated successfully !" });
   } catch (err) {
     res.status(500).json({ msg: "Error in updating snippet !" });
+  }
+}
+
+export const createSummary = async (req, res) => {
+  try {
+    const { code } = req.body;
+    if (!code) {
+      return res.status(400).json({ msg: "No code provided for summarization!" });
+    }
+
+    const summary = await fetchFromAIServer(code);
+
+    res.status(200).json({ msg: "Summary created successfully!", summary });
+  } catch (err) {
+    res.status(500).json({ msg: "Error in creating summary!", err: err.message });
   }
 }

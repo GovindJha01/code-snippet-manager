@@ -6,12 +6,14 @@ import {
   singleUserSnippet,
   singleSnippet,
   deleteSnippet,
-  updateSnippet
+  updateSnippet,
+  createSummary,
 } from "../controllers/snippet-controller.js";
 
 const router = express.Router();
 
 router.post("/create", auth, createSnippet);  // Create a new snippet
+router.post("/auto-summarize", auth, createSummary);
 router.get("/all", auth, getAllSnippet);  // Get all snippets 
 router.get("/:id", auth, singleSnippet); // Get a single snippet by ID  
 router.get("/user/:id", auth, singleUserSnippet); // Get all snippets by user ID
