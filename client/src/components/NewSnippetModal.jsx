@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Dialog,
   DialogTitle,
@@ -27,25 +27,44 @@ import {
   Add as AddIcon, 
 } from '@mui/icons-material';
 import { languages } from '../constants/data';
+import useSnippetStore from '../store/useSnippetStore';
+import language from 'react-syntax-highlighter/dist/esm/languages/hljs/1c';
 
 
 
 const NewSnippetModal = ({ open, onClose, onSubmit }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  
+  const  { autoSummarize } = useSnippetStore();
+
   const [formData, setFormData] = useState({
     title: '',
     description: '',
     language: '',
-    tags: '',
+    tags: [],
     code: '',
   });
 
   const [tagInput, setTagInput] = useState('');
   const [tags, setTags] = useState([]);
+  
+  useEffect(() => {
+    const fetchSummary = async () => {
+      if (formData.code) {
+        try {
+          const summary = await autoSummarize(formData.code);
+          const formattedSummary = JSON.parse(summary);
+          setTags(formattedSummary.tags);
+          setFormData((prev) => ({ ...prev, ...formattedSummary}));
+        } catch (error) {
+          console.error("Error fetching summary:", error);
+        }
+      }
+    };
+    setTimeout(fetchSummary,10000);
+  }, [formData.code]);
 
-  const selectedLang = languages.find(lang => lang.value === formData.language);
+  const selectedLang = languages.find(lang => lang.value.toLowerCase() === formData.language.toLowerCase());
 
   const handleChange = (field) => (e) => {
     setFormData({ ...formData, [field]: e.target.value });
@@ -66,6 +85,7 @@ const NewSnippetModal = ({ open, onClose, onSubmit }) => {
     if (!formData.title || !formData.code) return;
     const payload = {
       ...formData,
+      language: selectedLang?.value || '',
       tags: tags,
     };
     onSubmit(payload);
@@ -186,7 +206,7 @@ const NewSnippetModal = ({ open, onClose, onSubmit }) => {
             </Typography>
             <FormControl fullWidth>
               <Select
-                value={formData.language}
+                value={selectedLang?.value || ''}
                 onChange={handleChange('language')}
                 displayEmpty
                 sx={{

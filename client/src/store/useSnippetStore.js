@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import axios from "../utils/axiosInstance";
+import { AutoStories } from "@mui/icons-material";
 
 const useSnippetStore = create((set, get) => ({
   snippets: [],
@@ -37,6 +38,18 @@ const useSnippetStore = create((set, get) => ({
   },
  
   resetFetchFlag: () => set({ hasFetched: false }),
+
+
+
+  autoSummarize: async (code) => {
+    try {
+      const response = await axios.post("/snippets/auto-summarize", { code });
+      return response.data.summary;
+    } catch (error) {
+      console.error("Error fetching AI summary:", error);
+      throw error;
+    }
+  },
 
   // Create a new snippet
   createSnippet: async (snippetData) => {

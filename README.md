@@ -1,6 +1,6 @@
 # 🧠 CodeCrate – Code Snippet Manager
 
-CodeCrate is a full-stack web application that helps developers save, manage, and organize their code snippets efficiently. Designed with a clean, intuitive UI and developer-first experience in mind, it supports features like real-time search, inline editing, tagging, and user-specific access control.
+CodeCrate is a full-stack web application that helps developers save, manage, and organize their code snippets efficiently. Designed with a clean, intuitive UI and developer-first experience in mind, it supports features like real-time search, inline editing, tagging, and user-specific access control and also added AI asisted code summarization.
 
 ## ✨ Features
 
@@ -11,6 +11,7 @@ CodeCrate is a full-stack web application that helps developers save, manage, an
 - ⚡ Inline editing (only allowed for snippet creators)
 - 🌙 Dark mode toggle and user preferences
 - 👤 Profile settings and password update
+- 🗯 AI asisted code summarization while creating code snippet
 - 🔐 Frontend checks for permissions and secure API calls
 
 
@@ -72,5 +73,4 @@ npm run dev
 ## 🧪 Upcoming Features
 - Snippet sharing and public profiles
 - Folder nesting and drag-and-drop organization
-- AI-assisted code search
 
