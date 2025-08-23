@@ -54,7 +54,7 @@ cd ../server
 npm install
 ```
 
-3. ** Add environmental variable**
+3. **Add environmental variable**
 ```
 MONGO_URI=your_mongodb_uri
 JWT_SECRET=your_jwt_secret
